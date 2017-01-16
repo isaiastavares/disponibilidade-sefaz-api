@@ -9,6 +9,13 @@ import br.com.disponibilidadesefaz.dfe.controller.AbstractDisponibilidadeSefazDF
 import br.com.disponibilidadesefaz.entidade.DisponibilidadeSefazNFCe;
 import br.com.disponibilidadesefaz.nfce.service.DisponibilidadeSefazNFCeService;
 
+/**
+ * Controlador que expõe endpoints relacionados
+ * a disponibilidade dos serviços de NFC-e.
+ *
+ * @author Isaias Tavares
+ *
+ */
 @RestController
 @RequestMapping({"/nfce", "/nfc-e", "/NFCe", "/NFC-e"})
 public class DisponibilidadeSefazNFCeController extends AbstractDisponibilidadeSefazDFeCtrl<DisponibilidadeSefazNFCe> {
@@ -16,8 +23,10 @@ public class DisponibilidadeSefazNFCeController extends AbstractDisponibilidadeS
 	private final DisponibilidadeSefazNFCeService disponibilidadeSefazNfceService;
 
 	/**
-     * Constrói os endpoints para expor operações relacionadas
-     * a disponibilidade da Sefaz de NFC-e.
+     * Constrói o controlador responsável por expor endpoints relacionados a
+     * disponibilidade dos serviços de NFC-e.
+     *
+     * Realiza a validação dos parâmetros para que nenhum esteja nulo.
      *
 	 * @param disponibilidadeSefazNfceService serviço principal para lidar com disponibilidade Sefaz NFC-e
      */

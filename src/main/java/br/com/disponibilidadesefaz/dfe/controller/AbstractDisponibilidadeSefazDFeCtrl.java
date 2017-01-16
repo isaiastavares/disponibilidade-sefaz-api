@@ -13,19 +13,34 @@ import br.com.disponibilidadesefaz.dfe.dto.DisponibilidadeSefazDTOFactory;
 import br.com.disponibilidadesefaz.dfe.dto.RetornoSefazDisponibilidadeDTO;
 import br.com.disponibilidadesefaz.dfe.service.DisponibilidadeSefazDFeService;
 
+/**
+ * Controlador que expõe endpoints comuns relacionados
+ * a disponibilidade dos serviços de DF-e.
+ *
+ * @author Isaias Tavares
+ *
+ * @param <E> entidade relacionada a disponibilidade da Sefaz de acordo com o modelo fiscal
+ */
 public abstract class AbstractDisponibilidadeSefazDFeCtrl<E extends IDisponibilidadeSefazDFe> {
 
 	@Autowired
 	private DisponibilidadeSefazDTOFactory disponibilidadeSefazDTOFactory;
 
 	/**
-     * Obtém o serviço referente ao modelo.
+     * Obtém o service referente a disponibilidade da Sefaz
+     * de acordo com o modelo.
      *
-     * @param <S> serviço especifico para o modelo requerido
-     * @return o serviço relacionado ao seu modelo de documento fiscal
+     * @param <S> serviço especifico da Disponibilidade da Sefaz para o modelo requerido
+     * @param <E> entidade relacionada a disponibilidade da Sefaz de acordo com o modelo fiscal
+     * @return o serviço da Disponibilidade da Sefaz relacionado ao seu modelo
      */
     protected abstract <S extends DisponibilidadeSefazDFeService<E>> S getDFeService();
 
+    /**
+     * EndPoint que retorna a disponibilidade dos serviços de todos os estados.
+     *
+     * @return uma lista de {@link RetornoSefazDisponibilidadeDTO}
+     */
 	@RequestMapping(value = "/disponibilidade", method = RequestMethod.GET)
     public List<RetornoSefazDisponibilidadeDTO> consultaDisponibilidadeSefaz() {
 		List<RetornoSefazDisponibilidadeDTO> listDTO = new ArrayList<RetornoSefazDisponibilidadeDTO>();
@@ -35,6 +50,13 @@ public abstract class AbstractDisponibilidadeSefazDFeCtrl<E extends IDisponibili
 		return listDTO;
     }
 
+	/**
+	 * EndPoint que retorna a disponibilidade da Sefaz referente
+	 * a UF passada por parâmetro
+	 *
+	 * @param ufSigla código da UF que deseja consultar a disponibilidade.
+	 * @return {@link RetornoSefazDisponibilidadeDTO}
+	 */
 	@RequestMapping(value = "/disponibilidadePorUF", method = RequestMethod.GET)
     public RetornoSefazDisponibilidadeDTO consultaDisponibilidadeSefazPorUF(@RequestParam String ufSigla) {
 		return disponibilidadeSefazDTOFactory.gerarDTORetornoSefaz(getDFeService().disponibilidadePorUf(ufSigla));

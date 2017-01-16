@@ -12,6 +12,12 @@ import com.fincatto.dfe.classes.DFAmbiente;
 import com.fincatto.dfe.classes.DFUnidadeFederativa;
 import com.fincatto.nfe310.NFeConfig;
 
+/**
+ * Implementação da configuração de NF-e e NFC-e.
+ *
+ * @author Isaias Tavares
+ *
+ */
 public class NFeConfigImpl extends NFeConfig {
 
     private static final String CAMINHO_CERTIFICADO = "D:/Oobj/Certificados/esales2016.pfx";

@@ -13,6 +13,8 @@
 	<groupId>br.com</groupId>
 	<artifactId>disponibilidade-sefaz-api</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
+	<description>Serviço que consulta a disponibilidade do serviço da SEFAZ de tempos em tempos, persiste as
+	informações e expõe endpoints para poder trabalhar com essas informações obtidas</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -21,6 +23,14 @@
 		<version.api.nfe>2.0.1-SNAPSHOT</version.api.nfe>
 		<version.commons.io>2.5</version.commons.io>
 	</properties>
+
+	<developers>
+        <developer>
+            <id>isaiastavares</id>
+            <name>Isaias Tavares da Silva Neto</name>
+            <url>https://github.com/isaiastavares</url>
+        </developer>
+    </developers>
 
 	<dependencies>
 		<dependency>

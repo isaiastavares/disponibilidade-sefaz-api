@@ -16,15 +16,30 @@ import br.com.disponibilidadesefaz.entidade.DisponibilidadeSefazNFe;
 import br.com.disponibilidadesefaz.nfe.config.NFeConfigImpl;
 import br.com.disponibilidadesefaz.nfe.repository.DisponibilidadeSefazNFeRepository;
 
+/**
+ * Tarefa agendada que realiza uma consulta da
+ * disponibilidade dos Serviços da Sefaz (NF-e) de
+ * tempos em tempos.
+ *
+ * @author Isaias Tavares
+ *
+ */
 @Component
 public class SchedulerDisponibilidadeSefazNFe extends SchedulerDisponibilidadeSefazDFe<DisponibilidadeSefazNFe, DisponibilidadeSefazNFeRepository> {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(SchedulerDisponibilidadeSefazNFe.class);
 
 	private static final NFeConfig config = new NFeConfigImpl();
-
 	private final DisponibilidadeSefazNFeRepository disponibilidadeSefazNFeRepository;
 
+	/**
+	 * Constrói o scheduler responsável pelas consultas de
+     * disponibilidade dos serviços de NF-e.
+     *
+     * Realiza a validação dos parâmetros para que nenhum esteja nulo.
+     *
+	 * @param DisponibilidadeSefazNFeRepository repositório que lida com {@link DisponibilidadeSefazNFe}
+	 */
 	@Autowired
 	public SchedulerDisponibilidadeSefazNFe(DisponibilidadeSefazNFeRepository disponibilidadeSefazNFeRepository) {
 		super();

@@ -4,6 +4,12 @@ import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.Table;
 
+/**
+ * Representa a Disponibilidade do Serviços de NF-e
+ *
+ * @author Isaias Tavares
+ *
+ */
 @Entity
 @Table(name = "disponibilidade_sefaz_nfe",
 	indexes = { @Index(name = "idx_nfe_estado", columnList = "estado"),

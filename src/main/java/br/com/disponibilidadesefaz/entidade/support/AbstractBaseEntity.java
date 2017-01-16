@@ -12,6 +12,13 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+/**
+ * Super classe que contém os métodos básicos
+ * comum a todas as entidades.
+ *
+ * @author Isaias Tavares
+ *
+ */
 @MappedSuperclass
 @JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property = "_uuid")
 public abstract class AbstractBaseEntity implements Entityable {
@@ -23,7 +30,7 @@ public abstract class AbstractBaseEntity implements Entityable {
 	private Long id;
 
 	/**
-	 *
+	 * Construtor padrão
 	 */
 	public AbstractBaseEntity() {
 		super();

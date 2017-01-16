@@ -4,6 +4,12 @@ import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.Table;
 
+/**
+ * Representa a Disponibilidade do Serviços de NFC-e
+ *
+ * @author Isaias Tavares
+ *
+ */
 @Entity
 @Table(name = "disponibilidade_sefaz_nfce",
 	indexes = { @Index(name = "idx_nfce_estado", columnList = "estado"),

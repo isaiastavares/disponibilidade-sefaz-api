@@ -22,6 +22,13 @@ import br.com.disponibilidadesefaz.dfe.IDisponibilidadeSefazDFe;
 import br.com.disponibilidadesefaz.entidade.support.AbstractBaseEntity;
 import br.com.disponibilidadesefaz.enuns.TipoEmissao;
 
+/**
+ * Super Classe que contém os métodos comuns referente
+ * a Disponibilidade do Serviços de DF-e.
+ *
+ * @author Isaias Tavares
+ *
+ */
 @MappedSuperclass
 public class DisponibilidadeSefazDFe extends AbstractBaseEntity implements IDisponibilidadeSefazDFe {
 

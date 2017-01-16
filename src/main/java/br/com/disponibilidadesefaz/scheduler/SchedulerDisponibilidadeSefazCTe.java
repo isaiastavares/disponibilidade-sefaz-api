@@ -16,15 +16,30 @@ import br.com.disponibilidadesefaz.cte.config.CTeConfigImpl;
 import br.com.disponibilidadesefaz.cte.repository.DisponibilidadeSefazCTeRepository;
 import br.com.disponibilidadesefaz.entidade.DisponibilidadeSefazCTe;
 
+/**
+ * Tarefa agendada que realiza uma consulta da
+ * disponibilidade dos Serviços da Sefaz (CT-e) de
+ * tempos em tempos.
+ *
+ * @author Isaias Tavares
+ *
+ */
 @Component
 public class SchedulerDisponibilidadeSefazCTe extends SchedulerDisponibilidadeSefazDFe<DisponibilidadeSefazCTe, DisponibilidadeSefazCTeRepository> {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(SchedulerDisponibilidadeSefazCTe.class);
 
 	private static final CTeConfig config = new CTeConfigImpl();
-
 	private final DisponibilidadeSefazCTeRepository disponibilidadeSefazCTeRepository;
 
+	/**
+	 * Constrói o scheduler responsável pelas consultas de
+     * disponibilidade dos serviços de CT-e.
+     *
+     * Realiza a validação dos parâmetros para que nenhum esteja nulo.
+     *
+	 * @param disponibilidadeSefazCTeRepository repositório que lida com {@link DisponibilidadeSefazCTe}
+	 */
 	@Autowired
 	public SchedulerDisponibilidadeSefazCTe(DisponibilidadeSefazCTeRepository disponibilidadeSefazCTeRepository) {
 		super();

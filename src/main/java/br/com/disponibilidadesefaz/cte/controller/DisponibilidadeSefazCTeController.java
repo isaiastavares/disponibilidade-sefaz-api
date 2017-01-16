@@ -9,6 +9,13 @@ import br.com.disponibilidadesefaz.cte.service.DisponibilidadeSefazCTeService;
 import br.com.disponibilidadesefaz.dfe.controller.AbstractDisponibilidadeSefazDFeCtrl;
 import br.com.disponibilidadesefaz.entidade.DisponibilidadeSefazCTe;
 
+/**
+ * Controlador que expõe endpoints relacionados
+ * a disponibilidade dos serviços de CT-e.
+ *
+ * @author Isaias Tavares
+ *
+ */
 @RestController
 @RequestMapping({"/cte", "/ct-e", "/CTe", "/CT-e"})
 public class DisponibilidadeSefazCTeController extends AbstractDisponibilidadeSefazDFeCtrl<DisponibilidadeSefazCTe> {
@@ -16,8 +23,10 @@ public class DisponibilidadeSefazCTeController extends AbstractDisponibilidadeSe
 	private final DisponibilidadeSefazCTeService disponibilidadeSefazCteService;
 
 	/**
-     * Constrói os endpoints para expor operações relacionadas
-     * a disponibilidade da Sefaz de CT-e.
+     * Constrói o controlador responsável por expor endpoints relacionados a
+     * disponibilidade dos serviços de CT-e.
+     *
+     * Realiza a validação dos parâmetros para que nenhum esteja nulo.
      *
 	 * @param disponibilidadeSefazCteService serviço principal para lidar com disponibilidade Sefaz CT-e
      */

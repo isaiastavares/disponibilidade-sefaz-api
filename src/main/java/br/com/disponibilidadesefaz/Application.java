@@ -14,6 +14,12 @@ import com.fincatto.dfe.utils.DFGeraCadeiaCertificados;
 
 import br.com.disponibilidadesefaz.cte.config.CTeConfigImpl;
 
+/**
+ * Classe responsável por realizar o boot da aplicação
+ *
+ * @author Isaias Tavares
+ *
+ */
 @SpringBootApplication
 @EnableScheduling
 public class Application {
@@ -23,10 +29,14 @@ public class Application {
     private static final String CAMINHO_CADEIA_SERTIFICADO = System.getProperty("java.home") + "/lib/security/" + CACERT_PRODUCAO;
 
 	public static void main(String[] args) throws IOException, Exception {
+		gerarCertificado();
+		SpringApplication.run(Application.class, args);
+	}
+
+	private static void gerarCertificado() throws IOException, Exception {
 		FileUtils.writeByteArrayToFile(
 				new File(CAMINHO_CADEIA_SERTIFICADO),
 				DFGeraCadeiaCertificados.geraCadeiaCertificados(DFAmbiente.PRODUCAO,
 				config.getCadeiaCertificadosSenha()));
-		SpringApplication.run(Application.class, args);
 	}
 }

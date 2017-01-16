@@ -12,6 +12,12 @@ import com.fincatto.cte200.CTeConfig;
 import com.fincatto.dfe.classes.DFAmbiente;
 import com.fincatto.dfe.classes.DFUnidadeFederativa;
 
+/**
+ * Implementação da configuração de CT-e.
+ *
+ * @author Isaias Tavares
+ *
+ */
 public class CTeConfigImpl extends CTeConfig {
 
     private static final String CAMINHO_CERTIFICADO = "D:/Oobj/Certificados/esales2016.pfx";

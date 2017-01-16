@@ -14,6 +14,15 @@ import br.com.disponibilidadesefaz.dfe.repository.DisponibilidadeSefazDFeReposit
 import br.com.disponibilidadesefaz.entidade.DisponibilidadeSefazDFe;
 import br.com.disponibilidadesefaz.enuns.TipoEmissao;
 
+/**
+ * Classe abstrata que contém métodos comuns relacionados
+ * a disponibilidade dos Serviços da Sefaz (DF-e)
+ *
+ * @author Isaias Tavares
+ *
+ * @param <E> entidade relacionada a disponibilidade da Sefaz de acordo com o modelo fiscal
+ * @param <R> repositório relacionado a disponibilidade da Sefaz de acordo com o modelo fiscal
+ */
 public abstract class SchedulerDisponibilidadeSefazDFe<E extends DisponibilidadeSefazDFe, R extends DisponibilidadeSefazDFeRepository<E>> {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(SchedulerDisponibilidadeSefazDFe.class);
@@ -61,10 +70,28 @@ public abstract class SchedulerDisponibilidadeSefazDFe<E extends Disponibilidade
 		}
     }
 
+    /**
+     * Retorna uma nova instância de {@link E entidade de disponibilidade da Sefaz}.
+     *
+     * @return uma nova instância de {@link E entidade de disponibilidade da Sefaz}.
+     */
 	protected abstract E newInstanceDisponibilidadeSefaz();
 
+	/**
+    * Retorna uma instância do {@link R repositório de disponibilidade da sefaz}.
+    * @return uma instância do {@link R repositório de disponibilidade da sefaz}.
+    */
 	protected abstract R getRepository();
 
+	/**
+	 * Realiza a consulta da disponibilidade do serviço na SEFAZ do estado
+	 * passado por parâmetro.
+	 *
+	 * @param uf código da UF que deseja consultar a disponibilidade do serviço.
+	 * @return {@link IStatusServicoConsultaRetorno} o retorno da Sefaz com as informações
+	 * sobre a disponibilidade
+	 * @throws Exception lança exceção quando ocorrer alguma falha na consulta.
+	 */
 	protected abstract IStatusServicoConsultaRetorno consultaDisponibilidadeSefazPorUf(DFUnidadeFederativa uf) throws Exception;
 
 }

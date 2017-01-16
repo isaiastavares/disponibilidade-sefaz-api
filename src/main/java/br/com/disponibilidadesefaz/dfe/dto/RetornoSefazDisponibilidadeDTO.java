@@ -2,6 +2,13 @@ package br.com.disponibilidadesefaz.dfe.dto;
 
 import java.util.Date;
 
+/**
+ * Data transfer object (DTO) para listar
+ * o retorno da Sefaz referente a disponibilidade
+ * do serviços.
+ *
+ * @author Isaias Tavares
+ */
 public class RetornoSefazDisponibilidadeDTO {
 
 	private Long id;

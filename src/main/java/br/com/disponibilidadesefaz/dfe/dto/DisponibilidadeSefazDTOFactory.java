@@ -4,9 +4,23 @@ import org.springframework.stereotype.Component;
 
 import br.com.disponibilidadesefaz.dfe.IDisponibilidadeSefazDFe;
 
+/**
+ * Fábrica de {@link RetornoSefazDisponibilidadeDTO}
+ *
+ * @author Isaias Tavares
+ */
 @Component
 public class DisponibilidadeSefazDTOFactory {
 
+	/**
+	 * Gera um DTO contendo o retorno da Sefaz referente
+	 * a disponibilidade do serviço
+	 *
+	 * @param disponibilidadeSefaz interface que representa a entidade
+	 * de disponibilidade da Sefaz.
+	 *
+	 * @return objeto resultante da conversão {@link RetornoSefazDisponibilidadeDTO}
+	 */
 	public RetornoSefazDisponibilidadeDTO gerarDTORetornoSefaz(IDisponibilidadeSefazDFe disponibilidadeSefaz) {
 		RetornoSefazDisponibilidadeDTO retornoSefaz = new RetornoSefazDisponibilidadeDTO();
 		retornoSefaz.setId(disponibilidadeSefaz.getId());
