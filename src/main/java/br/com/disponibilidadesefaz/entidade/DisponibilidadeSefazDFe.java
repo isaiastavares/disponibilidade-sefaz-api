@@ -55,7 +55,7 @@ public class DisponibilidadeSefazDFe extends AbstractBaseEntity implements IDisp
 	@Column(name = "tipo_emissao", nullable = false, length = 1)
 	private Integer tipoEmissao;
 
-	@Column(name = "observacoes")
+	@Column(name = "observacoes", length = 1000)
 	private String xObs;
 
 	public String getEstado() {
