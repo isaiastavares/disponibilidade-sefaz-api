@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import com.fincatto.dfe.classes.DFUnidadeFederativa;
 import com.fincatto.dfe.classes.statusservico.consulta.IStatusServicoConsultaRetorno;
@@ -20,8 +21,15 @@ public abstract class SchedulerDisponibilidadeSefazDFe<E extends Disponibilidade
 	private static final Integer STATUS_FALHA_CONSULTA = 999;
 	private static final String MOTIVO_FALHA_CONSULTA = "Falha ao acessar o WebService de Consulta";
 
-	protected void consultarDisponibilidadeSefaz() {
-		List<DFUnidadeFederativa> listUFs = DFUnidadeFederativa.getApenasEstados();
+	/**
+     * Executa a cada 3 minutos (cron = "0 0/3 * 1/1 * ? *")
+     * uma consulta na Sefaz com o intuito de verificar a
+     * disponibilidade do serviço da Sefaz e persiste o
+     * resultado no Banco de Dados.
+     */
+    @Scheduled(cron = "0 0/3 * 1/1 * ?")
+    protected void configuraScheduleConsultaDisponibilidadeSefaz() {
+    	List<DFUnidadeFederativa> listUFs = DFUnidadeFederativa.getApenasEstados();
 
 		for (DFUnidadeFederativa uf : listUFs) {
 			E disponibilidadeSefaz = newInstanceDisponibilidadeSefaz();
@@ -46,7 +54,7 @@ public abstract class SchedulerDisponibilidadeSefazDFe<E extends Disponibilidade
 				getRepository().save(disponibilidadeSefaz);
 			}
 		}
-	}
+    }
 
 	protected abstract E newInstanceDisponibilidadeSefaz();
 

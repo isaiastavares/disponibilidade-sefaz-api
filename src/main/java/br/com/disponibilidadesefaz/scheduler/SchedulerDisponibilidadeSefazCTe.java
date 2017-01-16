@@ -3,7 +3,6 @@ package br.com.disponibilidadesefaz.scheduler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
@@ -34,17 +33,6 @@ public class SchedulerDisponibilidadeSefazCTe extends SchedulerDisponibilidadeSe
 
 		this.disponibilidadeSefazCTeRepository = disponibilidadeSefazCTeRepository;
 	}
-
-    /**
-     * Executa a cada 3 minutos (cron = "0 0/3 * 1/1 * ? *")
-     * uma consulta na Sefaz com o intuito de verificar a
-     * disponibilidade do serviço da Sefaz e persiste o
-     * resultado no Banco de Dados.
-     */
-    @Scheduled(cron = "0 0/3 * 1/1 * ?")
-    public void configuraScheduleConsultaDisponibilidadeSefaz() {
-    	consultarDisponibilidadeSefaz();
-    }
 
     @Override
 	protected DisponibilidadeSefazCTe newInstanceDisponibilidadeSefaz() {
