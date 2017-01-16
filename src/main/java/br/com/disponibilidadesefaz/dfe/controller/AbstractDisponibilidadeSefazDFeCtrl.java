@@ -1,5 +1,6 @@
 package br.com.disponibilidadesefaz.dfe.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,11 @@ public abstract class AbstractDisponibilidadeSefazDFeCtrl<E extends IDisponibili
 
 	@RequestMapping(value = "/disponibilidade", method = RequestMethod.GET)
     public List<RetornoSefazDisponibilidadeDTO> consultaDisponibilidadeSefaz() {
-		return disponibilidadeSefazDTOFactory.gerarDTORetornoSefaz(getDFeService().allDisponibilidades());
+		List<RetornoSefazDisponibilidadeDTO> listDTO = new ArrayList<RetornoSefazDisponibilidadeDTO>();
+		for (IDisponibilidadeSefazDFe disponibilidadeSefazDFe : getDFeService().allDisponibilidades()) {
+			listDTO.add(disponibilidadeSefazDTOFactory.gerarDTORetornoSefaz(disponibilidadeSefazDFe));
+		}
+		return listDTO;
     }
 
 	@RequestMapping(value = "/disponibilidadePorUF", method = RequestMethod.GET)

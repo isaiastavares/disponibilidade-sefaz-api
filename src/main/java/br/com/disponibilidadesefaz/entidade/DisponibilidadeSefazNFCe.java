@@ -11,7 +11,8 @@ import javax.persistence.Table;
 		@Index(name = "idx_nfce_x_motivo", columnList = "x_motivo"),
 		@Index(name = "idx_nfce_tempo_medio", columnList = "tempo_medio"),
 		@Index(name = "idx_nfce_data_ultima_consulta", columnList = "data_ultima_consulta"),
-		@Index(name = "idx_nfce_tipo_emissao", columnList = "tipo_emissao")
+		@Index(name = "idx_nfce_tipo_emissao", columnList = "tipo_emissao"),
+		@Index(name = "idx_nfce_observacoes", columnList = "observacoes")
 	}
 )
 public class DisponibilidadeSefazNFCe extends DisponibilidadeSefazDFe {

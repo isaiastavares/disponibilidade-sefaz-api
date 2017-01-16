@@ -24,4 +24,6 @@ public interface IDisponibilidadeSefazDFe {
 
 	TipoEmissao getTipoEmissaoType();
 
+	String getXObs();
+
 }

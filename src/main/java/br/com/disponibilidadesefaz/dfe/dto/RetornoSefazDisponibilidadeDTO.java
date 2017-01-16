@@ -13,6 +13,7 @@ public class RetornoSefazDisponibilidadeDTO {
 	private String tipoEmissao;
 	private Date dataUltimaConsulta;
 	private String dataUltimaConsultaFormatada;
+	private String observacao;
 
 	public Long getId() {
 		return id;
@@ -89,5 +90,13 @@ public class RetornoSefazDisponibilidadeDTO {
 
 	public void setDataUltimaConsultaFormatada(String dataUltimaConsultaFormatada) {
 		this.dataUltimaConsultaFormatada = dataUltimaConsultaFormatada;
+	}
+
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
 	}
 }

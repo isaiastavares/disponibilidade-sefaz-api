@@ -39,11 +39,11 @@ public class DisponibilidadeSefazDFe extends AbstractBaseEntity implements IDisp
 	private Integer statusServico;
 
 	@NotEmpty
-	@Column(name = "x_motivo", nullable = false)
+	@Size(min = 1, max = 60)
+	@Column(name = "x_motivo", nullable = false, length = 60)
 	private String xMotivo;
 
-	@NotNull
-	@Column(name = "tempo_medio", nullable = false)
+	@Column(name = "tempo_medio", length = 4)
 	private Integer tMed;
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -54,6 +54,10 @@ public class DisponibilidadeSefazDFe extends AbstractBaseEntity implements IDisp
 	@Range(min = 1, max = 2)
 	@Column(name = "tipo_emissao", nullable = false, length = 1)
 	private Integer tipoEmissao;
+
+	@Size(min = 1, max = 255)
+	@Column(name = "observacoes", length = 255)
+	private String xObs;
 
 	public String getEstado() {
 		return estado;
@@ -90,6 +94,7 @@ public class DisponibilidadeSefazDFe extends AbstractBaseEntity implements IDisp
 		this.tMed = tMed;
 	}
 
+	@Override
 	public Date getDataUltimaConsulta() {
 		return dataUltimaConsulta;
 	}
@@ -104,6 +109,15 @@ public class DisponibilidadeSefazDFe extends AbstractBaseEntity implements IDisp
 
 	public void setTipoEmissao(Integer tipoEmissao) {
 		this.tipoEmissao = tipoEmissao;
+	}
+
+	@Override
+	public String getXObs() {
+		return xObs;
+	}
+
+	public void setXObs(String xObs) {
+		this.xObs = xObs;
 	}
 
 	@Override

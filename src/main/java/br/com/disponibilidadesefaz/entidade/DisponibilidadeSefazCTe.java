@@ -11,7 +11,8 @@ import javax.persistence.Table;
 		@Index(name = "idx_cte_x_motivo", columnList = "x_motivo"),
 		@Index(name = "idx_cte_tempo_medio", columnList = "tempo_medio"),
 		@Index(name = "idx_cte_data_ultima_consulta", columnList = "data_ultima_consulta"),
-		@Index(name = "idx_cte_tipo_emissao", columnList = "tipo_emissao")
+		@Index(name = "idx_cte_tipo_emissao", columnList = "tipo_emissao"),
+		@Index(name = "idx_cte_observacoes", columnList = "observacoes")
 	}
 )
 public class DisponibilidadeSefazCTe extends DisponibilidadeSefazDFe {

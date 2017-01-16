@@ -13,7 +13,6 @@ import com.fincatto.dfe.classes.DFUnidadeFederativa;
 
 import br.com.disponibilidadesefaz.cte.repository.DisponibilidadeSefazCTeRepository;
 import br.com.disponibilidadesefaz.cte.service.DisponibilidadeSefazCTeService;
-import br.com.disponibilidadesefaz.dfe.IDisponibilidadeSefazDFe;
 import br.com.disponibilidadesefaz.dfe.service.AbstractDisponibilidadeSefazDFeService;
 import br.com.disponibilidadesefaz.entidade.DisponibilidadeSefazCTe;
 import br.com.disponibilidadesefaz.enuns.TipoEmissao;
@@ -34,10 +33,10 @@ public class DisponibilidadeSefazCTeServiceImpl extends AbstractDisponibilidadeS
 	}
 
 	@Override
-	public List<IDisponibilidadeSefazDFe> allDisponibilidades() {
-		List<IDisponibilidadeSefazDFe> disponibilidadesSefaz = new ArrayList<>();
+	public List<DisponibilidadeSefazCTe> allDisponibilidades() {
+		List<DisponibilidadeSefazCTe> disponibilidadesSefaz = new ArrayList<>();
 		for (DFUnidadeFederativa uf : DFUnidadeFederativa.getApenasEstados()) {
-			IDisponibilidadeSefazDFe disponibilidadeSefaz = disponibilidadeSefazCteRepository
+			DisponibilidadeSefazCTe disponibilidadeSefaz = disponibilidadeSefazCteRepository
 					.findFirstByEstadoAndTipoEmissaoOrderByDataUltimaConsultaDesc(
 							uf.getCodigo(), TipoEmissao.NORMAL.getCodigo());
 			disponibilidadesSefaz.add(disponibilidadeSefaz);
@@ -46,7 +45,7 @@ public class DisponibilidadeSefazCTeServiceImpl extends AbstractDisponibilidadeS
 	}
 
 	@Override
-	public IDisponibilidadeSefazDFe disponibilidadePorUf(String siglaUf) {
+	public DisponibilidadeSefazCTe disponibilidadePorUf(String siglaUf) {
 		return disponibilidadeSefazCteRepository.findFirstByEstadoAndTipoEmissaoOrderByDataUltimaConsultaDesc(
 				siglaUf, TipoEmissao.NORMAL.getCodigo());
 	}

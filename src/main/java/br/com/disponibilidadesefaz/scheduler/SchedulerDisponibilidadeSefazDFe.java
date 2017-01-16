@@ -17,23 +17,33 @@ public abstract class SchedulerDisponibilidadeSefazDFe<E extends Disponibilidade
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(SchedulerDisponibilidadeSefazDFe.class);
 
+	private static final Integer STATUS_FALHA_CONSULTA = 999;
+	private static final String MOTIVO_FALHA_CONSULTA = "Falha ao acessar o WebService de Consulta";
+
 	protected void consultarDisponibilidadeSefaz() {
 		List<DFUnidadeFederativa> listUFs = DFUnidadeFederativa.getApenasEstados();
 
 		for (DFUnidadeFederativa uf : listUFs) {
+			E disponibilidadeSefaz = newInstanceDisponibilidadeSefaz();
 			try {
 				IStatusServicoConsultaRetorno retornoSefaz = consultaDisponibilidadeSefazPorUf(uf);
 
-				E disponibilidadeSefaz = newInstanceDisponibilidadeSefaz();
 		    	disponibilidadeSefaz.setEstado(retornoSefaz.getUf().getCodigo());
 		    	disponibilidadeSefaz.setStatusServico(Integer.parseInt(retornoSefaz.getStatus()));
 		    	disponibilidadeSefaz.setXMotivo(retornoSefaz.getMotivo());
 		    	disponibilidadeSefaz.setTMed(Integer.parseInt(retornoSefaz.getTempoMedio()));
 		    	disponibilidadeSefaz.setDataUltimaConsulta(new Date());
 		    	disponibilidadeSefaz.setTipoEmissao(TipoEmissao.NORMAL.getCodigo());
-		    	getRepository().save(disponibilidadeSefaz);
+		    	disponibilidadeSefaz.setXObs(retornoSefaz.getObservacao());
 			} catch (Exception e) {
 				LOGGER.error(e.getMessage(), e);
+				disponibilidadeSefaz.setEstado(uf.getCodigo());
+		    	disponibilidadeSefaz.setStatusServico(STATUS_FALHA_CONSULTA);
+		    	disponibilidadeSefaz.setXMotivo(MOTIVO_FALHA_CONSULTA);
+		    	disponibilidadeSefaz.setDataUltimaConsulta(new Date());
+		    	disponibilidadeSefaz.setTipoEmissao(TipoEmissao.NORMAL.getCodigo());
+			} finally {
+				getRepository().save(disponibilidadeSefaz);
 			}
 		}
 	}
