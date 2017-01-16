@@ -28,6 +28,7 @@ public class DisponibilidadeSefazDFe extends AbstractBaseEntity implements IDisp
 	private static final long serialVersionUID = -2657970307637620943L;
 
 	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+	private static final String SEPARADOR = "; ";
 
 	@NotEmpty
 	@Size(min = 2, max = 2)
@@ -39,8 +40,7 @@ public class DisponibilidadeSefazDFe extends AbstractBaseEntity implements IDisp
 	private Integer statusServico;
 
 	@NotEmpty
-	@Size(min = 1, max = 60)
-	@Column(name = "x_motivo", nullable = false, length = 60)
+	@Column(name = "x_motivo", nullable = false)
 	private String xMotivo;
 
 	@Column(name = "tempo_medio", length = 4)
@@ -55,8 +55,7 @@ public class DisponibilidadeSefazDFe extends AbstractBaseEntity implements IDisp
 	@Column(name = "tipo_emissao", nullable = false, length = 1)
 	private Integer tipoEmissao;
 
-	@Size(min = 1, max = 255)
-	@Column(name = "observacoes", length = 255)
+	@Column(name = "observacoes")
 	private String xObs;
 
 	public String getEstado() {
@@ -136,5 +135,23 @@ public class DisponibilidadeSefazDFe extends AbstractBaseEntity implements IDisp
 	@Transient
 	public TipoEmissao getTipoEmissaoType() {
 		return TipoEmissao.valueOfCodigo(getTipoEmissao());
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("UF: ");
+		sb.append(getEstado());
+		sb.append(SEPARADOR);
+		sb.append("Status: ");
+		sb.append(getStatusServico());
+		sb.append(SEPARADOR);
+		sb.append("Motivo: ");
+		sb.append(getXMotivo());
+		sb.append(SEPARADOR);
+		sb.append("Tempo Médio: ");
+		sb.append(getTMed());
+		sb.append(SEPARADOR);
+		return sb.toString();
 	}
 }

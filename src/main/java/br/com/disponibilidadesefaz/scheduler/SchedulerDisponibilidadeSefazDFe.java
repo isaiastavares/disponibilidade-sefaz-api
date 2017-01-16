@@ -19,13 +19,18 @@ public abstract class SchedulerDisponibilidadeSefazDFe<E extends Disponibilidade
 	private static final Logger LOGGER = LoggerFactory.getLogger(SchedulerDisponibilidadeSefazDFe.class);
 
 	private static final Integer STATUS_FALHA_CONSULTA = 999;
-	private static final String MOTIVO_FALHA_CONSULTA = "Falha ao acessar o WebService de Consulta";
+	private static final String MOTIVO_SERVICO_INDISPONIVEL = "Serviço Indisponível";
 
 	/**
      * Executa a cada 3 minutos (cron = "0 0/3 * 1/1 * ? *")
-     * uma consulta na Sefaz com o intuito de verificar a
-     * disponibilidade do serviço da Sefaz e persiste o
-     * resultado no Banco de Dados.
+     * uma consulta na SEFAZ com o intuito de verificar a
+     * disponibilidade do serviço e persiste o resultado no
+     * Banco de Dados.
+     *
+     * Obs.: No Manual de Orientação do Contribuinte da SEFAZ,
+     * eles recomendam aguardar um tempo mínimo de 3 minutos
+     * entre cada consulta, evitando sobrecarregar desnecessariamente
+     * os servidores da SEFAZ.
      */
     @Scheduled(cron = "0 0/3 * 1/1 * ?")
     protected void configuraScheduleConsultaDisponibilidadeSefaz() {
@@ -40,17 +45,17 @@ public abstract class SchedulerDisponibilidadeSefazDFe<E extends Disponibilidade
 		    	disponibilidadeSefaz.setStatusServico(Integer.parseInt(retornoSefaz.getStatus()));
 		    	disponibilidadeSefaz.setXMotivo(retornoSefaz.getMotivo());
 		    	disponibilidadeSefaz.setTMed(Integer.parseInt(retornoSefaz.getTempoMedio()));
-		    	disponibilidadeSefaz.setDataUltimaConsulta(new Date());
-		    	disponibilidadeSefaz.setTipoEmissao(TipoEmissao.NORMAL.getCodigo());
 		    	disponibilidadeSefaz.setXObs(retornoSefaz.getObservacao());
 			} catch (Exception e) {
 				LOGGER.error(e.getMessage(), e);
 				disponibilidadeSefaz.setEstado(uf.getCodigo());
 		    	disponibilidadeSefaz.setStatusServico(STATUS_FALHA_CONSULTA);
-		    	disponibilidadeSefaz.setXMotivo(MOTIVO_FALHA_CONSULTA);
-		    	disponibilidadeSefaz.setDataUltimaConsulta(new Date());
-		    	disponibilidadeSefaz.setTipoEmissao(TipoEmissao.NORMAL.getCodigo());
+		    	disponibilidadeSefaz.setXMotivo(MOTIVO_SERVICO_INDISPONIVEL);
+		    	disponibilidadeSefaz.setXObs(e.getMessage());
 			} finally {
+				disponibilidadeSefaz.setDataUltimaConsulta(new Date());
+		    	disponibilidadeSefaz.setTipoEmissao(TipoEmissao.NORMAL.getCodigo());
+				LOGGER.info(disponibilidadeSefaz.toString());
 				getRepository().save(disponibilidadeSefaz);
 			}
 		}
