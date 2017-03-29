@@ -20,7 +20,7 @@ import com.fincatto.nfe310.NFeConfig;
  */
 public class NFeConfigImpl extends NFeConfig {
 
-    private static final String CAMINHO_CERTIFICADO = "D:/Oobj/Certificados/esales2016.pfx";
+    private static final String CAMINHO_CERTIFICADO = "D:/Certificados/certificado.pfx";
     private static final String CACERT_PRODUCAO = "producao.cacerts";
     private static final String CAMINHO_CADEIA_SERTIFICADO = System.getProperty("java.home") + "/lib/security/" + CACERT_PRODUCAO;
 
@@ -39,7 +39,7 @@ public class NFeConfigImpl extends NFeConfig {
 
     @Override
     public String getCertificadoSenha() {
-        return "esalestop";
+        return "senhacertificado";
     }
 
     @Override
